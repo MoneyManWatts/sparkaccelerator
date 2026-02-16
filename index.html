@@ -472,6 +472,13 @@
       .ide-body { min-height: 240px; }
       .ide-tab { padding: 0.25rem 0.5rem; font-size: 0.58rem; }
       .instructor-card img { height: 280px; }
+      /* Fix pillar diamond grids on mobile - stack to 1 column */
+      .pillar-grid { grid-template-columns: 1fr !important; gap: 0.25rem !important; }
+      /* Fix "complete stack" items on mobile */
+      .stack-item { flex-wrap: wrap !important; }
+      .stack-item .stack-attr { margin-left: 2rem; }
+      /* Fix guarantee check-list on mobile */
+      .guarantee-card .check-list { display: block !important; width: 100% !important; }
     }
   </style>
 </head>
@@ -677,21 +684,21 @@
         </div>
         <div class="glass-panel" style="margin-top: 2rem; padding: 2.5rem; text-align: center;">
           <p style="font-size: 1.2rem; color: var(--text); font-weight: 600; margin-bottom: 1.25rem;">Together, you get the complete stack:</p>
-          <div style="display: inline-flex; flex-direction: column; gap: 0.75rem; text-align: left; margin-bottom: 1.5rem;">
-            <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
-              <span style="color: var(--green); font-size: 1.25rem;">&#10003;</span>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; text-align: left; margin-bottom: 1.5rem; max-width: 420px; margin-left: auto; margin-right: auto;">
+            <div class="stack-item" style="display: flex; align-items: baseline; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
+              <span style="color: var(--green); font-size: 1.25rem; flex-shrink: 0;">&#10003;</span>
               <span>Software that works</span>
-              <span style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Rufus</span>
+              <span class="stack-attr" style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Rufus</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
-              <span style="color: var(--green); font-size: 1.25rem;">&#10003;</span>
+            <div class="stack-item" style="display: flex; align-items: baseline; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
+              <span style="color: var(--green); font-size: 1.25rem; flex-shrink: 0;">&#10003;</span>
               <span>Marketing that converts</span>
-              <span style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Watts</span>
+              <span class="stack-attr" style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Watts</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
-              <span style="color: var(--green); font-size: 1.25rem;">&#10003;</span>
+            <div class="stack-item" style="display: flex; align-items: baseline; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
+              <span style="color: var(--green); font-size: 1.25rem; flex-shrink: 0;">&#10003;</span>
               <span>A business you own</span>
-              <span style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Both</span>
+              <span class="stack-attr" style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Both</span>
             </div>
           </div>
           <div style="width: 60px; height: 2px; background: var(--accent); margin: 0 auto 1rem; border-radius: 99px;"></div>
@@ -738,7 +745,7 @@
             <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">Pillar 1: Your Own Software</h3>
             <p style="color: var(--accent); font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem;">Built The Right Way</p>
             <p class="body-text" style="margin-bottom: 0.75rem;">Forget Replit. Forget Lovable. Forget rented platforms. You&rsquo;ll build on professional infrastructure that you completely own.</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1.5rem; margin-bottom: 0.75rem;">
+            <div class="pillar-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1.5rem; margin-bottom: 0.75rem;">
               <p class="body-text">&#9670; Modern web framework</p>
               <p class="body-text">&#9670; Secure database</p>
               <p class="body-text">&#9670; Professional hosting</p>
@@ -751,7 +758,7 @@
             <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">Pillar 2: Marketing Infrastructure</h3>
             <p style="color: var(--accent); font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem;">Pre-Installed</p>
             <p class="body-text" style="margin-bottom: 0.75rem;">Complete marketing machine powered by the OfferNomics framework that&rsquo;s scaled over <span class="accent" style="font-weight: 700;">$525M in online sales</span>.</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1.5rem; margin-bottom: 0.75rem;">
+            <div class="pillar-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1.5rem; margin-bottom: 0.75rem;">
               <p class="body-text">&#9670; Sales funnel (opt-in &rarr; checkout)</p>
               <p class="body-text">&#9670; Email sequences</p>
               <p class="body-text">&#9670; SMS automations</p>
