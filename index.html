@@ -433,18 +433,16 @@
     .countdown-sep { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--accent); line-height: 1; opacity: 0.4; }
 
     /* ═══ CREDIBILITY BAR ═══ */
-    .cred-bar { padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); position: relative; overflow: hidden; }
-    .cred-bar::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,72,0,0.3), transparent); }
-    .cred-bar::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,72,0,0.3), transparent); }
-    .cred-label { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-secondary); margin-bottom: 2rem; font-weight: 500; }
-    .cred-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1rem 1.5rem; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .cred-item { display: flex; align-items: center; justify-content: center; gap: 0.5rem; color: var(--text-muted); font-size: 1.05rem; font-weight: 600; transition: all 0.3s; padding: 0.6rem 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); }
-    .cred-item:hover { color: var(--text); border-color: rgba(255,72,0,0.3); background: rgba(255,72,0,0.05); }
+    .cred-bar { padding: 2rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .cred-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1rem; }
+    .cred-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.5rem 2.5rem; }
+    .cred-item { display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; transition: color 0.2s; }
+    .cred-item:hover { color: var(--text-secondary); }
     .cred-item svg { width: 20px; height: 20px; opacity: 0.5; }
-    .cred-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem 5rem; }
-    .cred-stat { text-align: center; position: relative; }
-    .cred-stat .val { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 0.25rem; }
-    .cred-stat .desc { font-size: 0.95rem; color: var(--text-muted); font-weight: 400; letter-spacing: 0.02em; }
+    .cred-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem 3.5rem; margin-top: 1.25rem; }
+    .cred-stat { text-align: center; }
+    .cred-stat .val { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .cred-stat .desc { font-size: 0.85rem; color: var(--text-muted); }
 
     /* ═══ STICKY MOBILE CTA ═══ */
     .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: rgba(5,5,5,0.95); backdrop-filter: blur(12px); border-top: 1px solid rgba(255,72,0,0.2); padding: 0.75rem 1.25rem; display: none; transform: translateY(100%); transition: transform 0.3s ease; }
@@ -633,12 +631,12 @@
     <div class="cred-bar reveal">
       <p class="cred-label">Built on Production-Grade Infrastructure</p>
       <div class="cred-logos">
-        <div class="cred-item">&#9889; <strong>React</strong></div>
-        <div class="cred-item">&#9889; <strong>TypeScript</strong></div>
-        <div class="cred-item">&#9889; <strong>PostgreSQL</strong></div>
-        <div class="cred-item">&#9889; <strong>Stripe</strong></div>
-        <div class="cred-item">&#9889; <strong>Supabase</strong></div>
-        <div class="cred-item">&#9889; <strong>Vercel</strong></div>
+        <div class="cred-item"><strong>React</strong></div>
+        <div class="cred-item"><strong>TypeScript</strong></div>
+        <div class="cred-item"><strong>PostgreSQL</strong></div>
+        <div class="cred-item"><strong>Stripe</strong></div>
+        <div class="cred-item"><strong>Supabase</strong></div>
+        <div class="cred-item"><strong>Vercel</strong></div>
       </div>
       <div class="cred-stats">
         <div class="cred-stat"><div class="val" style="color: var(--accent);">$525M+</div><div class="desc">Combined Sales Generated</div></div>
