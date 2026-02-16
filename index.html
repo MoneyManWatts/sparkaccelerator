@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>The SPARK Accelerator&trade; | Build a Real Software Business in 3 Days</title>
+  <meta name="description" content="3-day in-person intensive in Dallas, TX. Arrive with an idea. Leave with a live, production-ready application. Led by Damien Rufus & Damien Watts." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══ DESIGN SYSTEM ═══
+       Structure: GPTAccessOS layout patterns
+       Skin: damienrufus.com colors + typography
+    ═══════════════════════ */
+    :root {
+      --bg: #050505;
+      --surface: #111111;
+      --surface-alt: #0f0f0f;
+      --accent: #ff4800;
+      --accent-hover: #ff6622;
+      --accent-glow: rgba(255, 72, 0, 0.15);
+      --accent-border: rgba(255, 72, 0, 0.12);
+      --accent-border-hover: rgba(255, 72, 0, 0.5);
+      --text: #ffffff;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --text-dim: #475569;
+      --green: #22c55e;
+      --red: #ef4444;
+      --font-display: "Playfair Display", serif;
+      --font-body: "Outfit", sans-serif;
+      --font-mono: "Courier New", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body { overflow-x: hidden; line-height: 1.6; }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── Grid mesh background (GPTAccessOS pattern) ─── */
+    .grid-mesh {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,72,0,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,72,0,0.035) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* Noise overlay */
+    .noise {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── Layout containers (GPTAccessOS pattern) ─── */
+    .w-7xl { max-width: 1320px; margin: 0 auto; }
+    .w-6xl { max-width: 1200px; margin: 0 auto; }
+    .w-5xl { max-width: 1080px; margin: 0 auto; }
+    .w-4xl { max-width: 960px; margin: 0 auto; }
+    .w-3xl { max-width: 840px; margin: 0 auto; }
+    .px { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+    /* ─── Section spacing (GPTAccessOS tokens) ─── */
+    .section { padding: 4rem 1.5rem; }
+    .section-tight { padding: 3rem 1.5rem; }
+
+    /* ─── Glass panels (GPTAccessOS pattern, damienrufus colors) ─── */
+    .glass {
+      background: rgba(17,17,17,0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,72,0,0.2);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(255,72,0,0.1), 0 0 40px rgba(255,72,0,0.04);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .glass:hover { border-color: rgba(255,72,0,0.4); box-shadow: 0 0 24px rgba(255,72,0,0.18), 0 0 50px rgba(255,72,0,0.08); }
+
+    .glass-panel {
+      background: rgba(17,17,17,0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,72,0,0.2);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(255,72,0,0.1), 0 0 40px rgba(255,72,0,0.04);
+    }
+
+    /* ─── Typography ─── */
+    .heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .sub { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; }
+    .body-text { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; }
+    .label {
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+    .accent { color: var(--accent); }
+    .italic { font-family: var(--font-display); font-style: italic; }
+
+    /* ─── Buttons ─── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent); color: #fff;
+      padding: 1rem 2rem;
+      font-family: var(--font-body); font-weight: 700; font-size: 16px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      border: none; border-radius: 8px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.05); color: var(--text);
+      padding: 1rem 2rem;
+      font-family: var(--font-body); font-weight: 700; font-size: 16px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer;
+      backdrop-filter: blur(4px); transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* ─── Glow + shimmer ─── */
+    .neon-glow { box-shadow: 0 0 20px rgba(255,72,0,0.25); }
+    .neon-glow-strong { box-shadow: 0 0 40px rgba(255,72,0,0.35); }
+    .text-glow { text-shadow: 0 0 10px rgba(255,72,0,0.5); }
+    .cta-shimmer { position: relative; overflow: hidden; }
+    .cta-shimmer::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+
+    /* ─── Reveal ─── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── Theme divider ─── */
+    .theme-divider { display: flex; align-items: center; justify-content: center; padding: 1rem 1.5rem; }
+    .theme-divider .line { height: 1px; flex: 1; }
+    .theme-divider .line-l { background: linear-gradient(to right, transparent, rgba(255,72,0,0.25)); }
+    .theme-divider .line-r { background: linear-gradient(to left, transparent, rgba(255,72,0,0.25)); }
+
+    /* ═══ NAV ═══ */
+    .nav { position: fixed; top: 0; width: 100%; z-index: 50; background: rgba(5,5,5,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--accent-border); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-brand { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; text-transform: uppercase; }
+    .nav-links { display: none; gap: 2rem; font-size: 1rem; font-weight: 500; color: var(--text-secondary); }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 700; font-size: 15px; background: var(--accent); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--accent-hover); }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+
+    /* ═══ HERO ═══ */
+    .hero { position: relative; padding: 8rem 1.5rem 4rem; overflow: hidden; }
+    .hero-glow { position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; border-radius: 50%; background: rgba(255,72,0,0.08); filter: blur(120px); z-index: -1; }
+    .hero-grid { max-width: 1280px; margin: 0 auto; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.85rem; border-radius: 99px; background: rgba(255,72,0,0.08); border: 1px solid rgba(255,72,0,0.2); margin-bottom: 1.5rem; }
+    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero-badge span { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.04em; margin-bottom: 1.5rem; }
+    .hero-sub { font-size: 1.2rem; color: var(--text-secondary); max-width: 540px; line-height: 1.7; margin-bottom: 0.5rem; }
+    .hero-bold { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; }
+    .hero-small { font-size: 0.95rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 1.25rem; }
+    .hero-proof { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.5rem; font-size: 1rem; }
+    .hero-proof-item { display: flex; align-items: center; gap: 0.4rem; }
+    .hero-proof-item .icon { color: var(--accent); font-weight: 700; }
+    .hero-proof-item .val { color: var(--text-secondary); font-weight: 500; }
+    .hero-proof-item .dim { color: var(--text-muted); }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .hero-visual { display: flex; align-items: center; justify-content: center; margin-top: 2rem; }
+    @media (min-width: 1024px) {
+      .hero { padding: 10rem 1.5rem 5rem; }
+      .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+      .hero-visual { margin-top: 0; }
+    }
+
+    /* Hero interactive IDE */
+    .hero-ide { width: 100%; max-width: 480px; border-radius: 16px; overflow: hidden; border: 1px solid var(--accent-border); background: var(--surface); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,72,0,0.08); }
+    .ide-header { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.3); }
+    .ide-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .ide-tabs { display: flex; gap: 0; margin-left: 0.75rem; flex: 1; }
+    .ide-tab { padding: 0.3rem 0.75rem; font-size: 0.65rem; font-family: var(--font-mono); color: var(--text-muted); border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .ide-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(255,72,0,0.04); }
+    .ide-tab:hover:not(.active) { color: var(--text-secondary); }
+    .ide-body { display: flex; flex-direction: column; min-height: 280px; }
+    @media (min-width: 1024px) { .ide-body { min-height: 320px; } }
+    .ide-code { padding: 1rem; font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.7; flex: 1; overflow: hidden; position: relative; }
+    .ide-code .line-num { color: rgba(255,255,255,0.15); display: inline-block; width: 24px; text-align: right; margin-right: 12px; user-select: none; }
+    .ide-code .kw { color: #c792ea; }
+    .ide-code .fn { color: #82aaff; }
+    .ide-code .str { color: #c3e88d; }
+    .ide-code .cm { color: #546e7a; }
+    .ide-code .op { color: #89ddff; }
+    .ide-code .var { color: #f78c6c; }
+    .ide-code .tag { color: #f07178; }
+    .ide-code .attr { color: #ffcb6b; }
+    .ide-code .type-cursor { display: inline-block; width: 2px; height: 13px; background: var(--accent); margin-left: 1px; vertical-align: text-bottom; animation: cursor-blink 0.8s step-end infinite; }
+    @keyframes cursor-blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+    .ide-code-panel { display: none; }
+    .ide-code-panel.active { display: block; }
+    /* Terminal bar at bottom */
+    .ide-terminal { border-top: 1px solid rgba(255,255,255,0.06); padding: 0.6rem 1rem; background: rgba(0,0,0,0.25); }
+    .ide-terminal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; }
+    .ide-terminal-title { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .ide-status { display: flex; align-items: center; gap: 0.35rem; }
+    .ide-status-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .ide-status-text { font-family: var(--font-mono); font-size: 0.6rem; }
+    .ide-terminal-lines { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); line-height: 1.6; }
+    .ide-terminal-lines .success { color: var(--green); }
+    .ide-terminal-lines .warn { color: #f59e0b; }
+    .ide-terminal-lines .accent { color: var(--accent); }
+    /* Progress bar */
+    .ide-progress { height: 2px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; margin-top: 0.5rem; }
+    .ide-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--green)); border-radius: 2px; transition: width 0.8s ease; }
+    /* Typing animation for terminal */
+    .terminal-line { opacity: 0; transform: translateY(4px); transition: opacity 0.3s, transform 0.3s; }
+    .terminal-line.show { opacity: 1; transform: translateY(0); }
+
+    /* ═══ FEATURES GRID ═══ */
+    .features-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
+    .feature-card { padding: 2rem 1.75rem; display: flex; flex-direction: column; }
+    .feature-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; background: rgba(255,72,0,0.12); color: var(--accent); font-size: 1.1rem; font-weight: 700; transition: background 0.3s; }
+    .feature-card:hover .feature-icon { background: rgba(255,72,0,0.25); }
+    .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .feature-card p { font-size: 1rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* ═══ INSTRUCTORS ═══ */
+    .instructor-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (min-width: 768px) { .instructor-grid { grid-template-columns: 1fr 1fr; } }
+    .instructor-card { padding: 2rem; display: flex; flex-direction: column; }
+    .instructor-card img { width: 100%; height: 360px; border-radius: 10px; object-fit: contain; background: rgba(0,0,0,0.3); margin-bottom: 1.25rem; filter: grayscale(30%); transition: filter 0.3s; }
+    .instructor-card:hover img { filter: grayscale(0%); }
+    .instructor-card h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .instructor-card .role { font-size: 0.9rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+    .instructor-card .tagline { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--text); margin-bottom: 0.6rem; }
+    .instructor-card .desc { font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
+    .instructor-card .focus { font-size: 0.95rem; color: var(--text-secondary); padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+    .stack-list { list-style: none; padding: 0; }
+    .stack-list li { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0; font-size: 1.1rem; font-weight: 500; }
+    .stack-list .check { color: var(--green); font-weight: 700; }
+    .stack-list em { color: var(--text-muted); font-size: 0.95rem; font-style: normal; }
+
+    /* ═══ PAIN POINTS ═══ */
+    .pain-item { display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; border-radius: 12px; background: rgba(239,68,68,0.04); border: 1px solid rgba(239,68,68,0.2); margin-bottom: 0.75rem; box-shadow: 0 0 15px rgba(239,68,68,0.06); transition: border-color 0.3s, box-shadow 0.3s; }
+    .pain-item:hover { border-color: rgba(239,68,68,0.4); box-shadow: 0 0 20px rgba(239,68,68,0.12); }
+    .pain-icon { width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: rgba(239,68,68,0.15); color: var(--red); flex-shrink: 0; font-weight: 700; }
+    .pain-item h4 { font-size: 1.05rem; font-weight: 700; color: #fecaca; }
+    .pain-item p { font-size: 0.95rem; color: var(--text-secondary); }
+    .pain-code { font-family: var(--font-mono); font-size: 11px; color: rgba(239,68,68,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-left: auto; flex-shrink: 0; display: none; }
+    @media (min-width: 640px) { .pain-code { display: block; } }
+
+    /* ═══ CHECK LIST ═══ */
+    .check-list { list-style: none; padding: 0; }
+    .check-list li { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.4rem 0; font-size: 1.05rem; }
+    .check-list .icon { color: var(--green); flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+
+    /* ═══ STEPS ROW ═══ */
+    .steps-row { display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
+    @media (min-width: 768px) { .steps-row { flex-direction: row; gap: 0; justify-content: space-between; } }
+    .step { flex: 1; text-align: center; position: relative; z-index: 1; }
+    .step-circle { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; border: 2px solid var(--accent); color: var(--accent); background: var(--surface-alt); }
+    .step-circle.active { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px rgba(255,72,0,0.4); }
+    .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .step p { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; max-width: 300px; margin: 0 auto; }
+
+    /* ═══ DAY BLOCKS ═══ */
+    .day-block { margin-bottom: 0.5rem; }
+    .day-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; cursor: pointer; border-radius: 10px; transition: background 0.2s; }
+    .day-header:hover { background: rgba(255,255,255,0.02); }
+    .day-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .day-label { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+    .day-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; flex: 1; }
+    .day-chevron { font-size: 0.85rem; color: var(--text-secondary); transition: transform 0.2s; }
+    .day-block.open .day-chevron { transform: rotate(180deg); }
+    .day-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 1.25rem; }
+    .day-block.open .day-body { max-height: 800px; }
+    .day-body-inner { padding: 0.75rem 0 1.5rem; }
+    .day-shift { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .day-led { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.75rem; }
+    .day-sub { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin: 1rem 0 0.5rem; }
+    .day-list { list-style: none; padding: 0; }
+    .day-list li { font-size: 1.05rem; color: var(--text-secondary); padding: 0.3rem 0 0.3rem 1rem; position: relative; }
+    .day-list li::before { content: ''; position: absolute; left: 0; top: 0.7rem; width: 4px; height: 4px; border-radius: 50%; background: var(--text-secondary); }
+    .day-win { margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(255,72,0,0.06); border-left: 3px solid var(--accent); font-size: 1.05rem; font-weight: 600; border-radius: 0 6px 6px 0; }
+
+    /* ═══ LOCATION ═══ */
+    .location-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    @media (min-width: 768px) { .location-grid { grid-template-columns: repeat(4, 1fr); } }
+    .location-card { padding: 1.75rem; text-align: center; }
+    .location-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .location-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .location-card p { font-size: 0.95rem; color: var(--text-secondary); }
+
+    /* ═══ PRICING ═══ */
+    .pricing-card { max-width: 560px; margin: 0 auto; padding: 3rem 2.5rem; text-align: center; position: relative; }
+    .pricing-old { font-size: 1.05rem; color: var(--text-secondary); text-decoration: line-through; margin-bottom: 0.25rem; }
+    .pricing-amount { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 4.5rem); font-weight: 700; color: var(--accent); margin-bottom: 0.15rem; }
+    .pricing-label { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 1.25rem; }
+    .pricing-checks { list-style: none; padding: 0; text-align: left; display: inline-block; margin-bottom: 1.5rem; }
+    .pricing-checks li { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; font-size: 1.1rem; }
+    .pricing-checks .icon { color: var(--green); font-weight: 700; }
+    .seats-note { margin-top: 0.75rem; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+
+    /* ═══ GUARANTEE ═══ */
+    .guarantee-card { max-width: 700px; margin: 0 auto; padding: 3rem; text-align: center; }
+
+    /* ═══ AUDIENCE ═══ */
+    .audience-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 768px) { .audience-grid { grid-template-columns: 1fr 1fr; } }
+    .audience-card { padding: 2rem; }
+    .audience-card h3 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+    .audience-card.for h3 { color: var(--green); }
+    .audience-card.not h3 { color: var(--red); }
+    .audience-list { list-style: none; padding: 0; }
+    .audience-list li { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.3rem 0; font-size: 1.05rem; color: rgba(255,255,255,0.85); }
+    .audience-list .icon { flex-shrink: 0; font-weight: 700; }
+    .for .icon { color: var(--green); }
+    .not .icon { color: var(--red); }
+
+    /* ═══ COMPARISON ═══ */
+    .comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    @media (min-width: 768px) { .comp-grid { grid-template-columns: repeat(4, 1fr); } }
+    .comp-col { padding: 1.75rem 1.5rem; text-align: center; border-radius: 12px; }
+    .comp-col.highlighted { border-color: var(--accent-border-hover); background: rgba(255,72,0,0.04); }
+    .comp-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+    .comp-cost { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .comp-time { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
+    .comp-risk { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem; min-height: 1.5rem; }
+    .comp-verdict { font-size: 1.25rem; font-weight: 700; }
+    .highlighted .comp-cost { color: var(--accent); }
+    .highlighted .comp-verdict { color: var(--green); }
+
+    /* ═══ SAVINGS ═══ */
+    .savings-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 768px) { .savings-grid { grid-template-columns: repeat(3, 1fr); } }
+    .savings-card { padding: 1.75rem; }
+    .savings-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .savings-row { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 1rem; }
+    .savings-row:last-child { border: none; }
+    .savings-name { color: var(--text-secondary); }
+    .savings-cost { color: var(--text-muted); text-decoration: line-through; }
+    .savings-yours { color: var(--green); font-weight: 700; text-decoration: none; }
+
+    /* ═══ INCLUDED ═══ */
+    .included-list { list-style: none; padding: 0; max-width: 680px; }
+    .included-list li { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .included-list li:last-child { border: none; }
+    .included-list .icon { color: var(--green); font-weight: 700; }
+
+    /* ═══ FAQ ═══ */
+    .faq-wrapper { max-width: 840px; margin: 0 auto; padding: 2.5rem; }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .faq-q { padding: 1rem 0; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-size: 1.1rem; font-weight: 600; transition: color 0.2s; user-select: none; }
+    .faq-q:hover { color: var(--accent); }
+    .faq-chevron { font-size: 0.9rem; color: var(--text-secondary); transition: transform 0.2s; flex-shrink: 0; margin-left: 1rem; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-a-inner { padding: 0 0 1rem; font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ═══ FINAL CTA ═══ */
+    .final-cta-card { max-width: 840px; margin: 0 auto; padding: 3.5rem 2.5rem; text-align: center; }
+
+    /* ═══ FOOTER ═══ */
+    .footer { padding: 1.5rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.25rem; }
+    .footer a { color: var(--accent); }
+
+    /* ═══ SEAT COUNTER ═══ */
+    .seat-counter { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+    .seat-counter-text { font-size: 1rem; font-weight: 600; color: var(--text); }
+    .seat-counter-text .num { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
+    .seat-bar { width: 100%; max-width: 280px; height: 8px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+    .seat-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--accent), #ff6622); transition: width 1.5s ease; }
+    .seat-counter-sub { font-size: 0.85rem; color: var(--text-muted); }
+    .seat-counter-inline { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.75rem; }
+    .seat-bar-inline { width: 120px; height: 6px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+    .seat-bar-inline .seat-bar-fill { height: 100%; }
+    .seat-counter-inline .num { color: var(--accent); font-weight: 700; }
+    .seat-counter-inline span { font-size: 0.9rem; color: var(--text-secondary); }
+
+    /* ═══ COUNTDOWN ═══ */
+    .countdown { display: flex; justify-content: center; gap: 1rem; margin-top: 1.25rem; }
+    .countdown-block { text-align: center; min-width: 60px; }
+    .countdown-num { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--text); line-height: 1; }
+    .countdown-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 0.25rem; }
+    .countdown-sep { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--accent); line-height: 1; opacity: 0.4; }
+
+    /* ═══ CREDIBILITY BAR ═══ */
+    .cred-bar { padding: 2rem 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .cred-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1rem; }
+    .cred-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2rem 2.5rem; }
+    .cred-item { display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+    .cred-item:hover { color: var(--text-secondary); }
+    .cred-item svg { width: 20px; height: 20px; opacity: 0.5; }
+    .cred-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 1.25rem; }
+    .cred-stat { text-align: center; }
+    .cred-stat .val { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--text); }
+    .cred-stat .desc { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ═══ STICKY MOBILE CTA ═══ */
+    .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: rgba(5,5,5,0.95); backdrop-filter: blur(12px); border-top: 1px solid rgba(255,72,0,0.2); padding: 0.75rem 1.25rem; display: none; transform: translateY(100%); transition: transform 0.3s ease; }
+    .sticky-cta.visible { transform: translateY(0); }
+    .sticky-cta-inner { max-width: 600px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+    .sticky-cta-info { display: flex; flex-direction: column; }
+    .sticky-cta-price { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+    .sticky-cta-seats { font-size: 0.75rem; color: var(--text-secondary); }
+    .sticky-cta .btn-primary { padding: 0.75rem 1.5rem; font-size: 14px; white-space: nowrap; flex-shrink: 0; }
+    @media (max-width: 1024px) { .sticky-cta { display: block; } }
+    @media (min-width: 1025px) { .sticky-cta { display: none !important; } }
+
+    /* ═══ GUARANTEE ENHANCED ═══ */
+    .guarantee-shield { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: rgba(34,197,94,0.1); border: 2px solid rgba(34,197,94,0.3); margin: 0 auto 1rem; font-size: 1.5rem; }
+    .guarantee-card { border-color: rgba(34,197,94,0.2) !important; box-shadow: 0 0 18px rgba(34,197,94,0.08), 0 0 40px rgba(34,197,94,0.03) !important; }
+    .guarantee-badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.85rem; border-radius: 99px; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); font-size: 0.8rem; font-weight: 700; color: var(--green); margin-top: 0.5rem; }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 640px) {
+      .section { padding: 3rem 1.25rem; }
+      .hero { padding: 6rem 1.25rem 3rem; }
+      .hero h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; justify-content: center; }
+      .heading { font-size: clamp(1.75rem, 6vw, 2.25rem); }
+      .hero-ide { max-width: 100%; }
+      .ide-code { font-size: 0.6rem; padding: 0.75rem; }
+      .ide-body { min-height: 240px; }
+      .ide-tab { padding: 0.25rem 0.5rem; font-size: 0.58rem; }
+      .instructor-card img { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-mesh"></div>
+  <div class="noise"></div>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">SPARK <span class="accent">Accelerator</span></div>
+      <div class="nav-links">
+        <a href="#instructors">Instructors</a>
+        <a href="#system">The System</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="https://buy.stripe.com/cNi6oH72v4AOargfPl6g80a" class="nav-cta">Reserve Seat</a>
+    </div>
+  </nav>
+
+  <main style="position: relative; z-index: 2;">
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">
+            <div class="dot"></div>
+            <span>February 27&ndash;29, 2026 &middot; Dallas, TX</span>
+          </div>
+          <h1>Build a Real<br/>Software<br/><span class="accent">Business.</span></h1>
+          <p class="hero-sub">The SPARK Accelerator&trade; is a 3-day, in-person build sprint. You arrive with an idea. You leave with a live, production-ready application.</p>
+          <p class="hero-bold">We handle the build. You own the business.</p>
+          <p class="hero-small">No theory. No fluff. Just pure execution.</p>
+          <div class="hero-proof">
+            <div class="hero-proof-item"><span class="icon">&#9889;</span><span class="val"><span class="num seat-num">13</span> of 20 <span class="dim">seats claimed</span></span></div>
+            <div class="hero-proof-item"><span class="icon">&#9734;</span><span class="val">$525M+ <span class="dim">in sales (Watts)</span></span></div>
+            <div class="hero-proof-item"><span class="icon">&#9670;</span><span class="val">3 days <span class="dim">to launch</span></span></div>
+          </div>
+          <div class="hero-ctas">
+            <a href="https://buy.stripe.com/cNi6oH72v4AOargfPl6g80a" class="btn-primary cta-shimmer neon-glow">Reserve Your Seat &mdash; $2,500 &rarr;</a>
+            <a href="#system" class="btn-secondary">See How It Works</a>
+          </div>
+          <!-- Countdown -->
+          <div class="countdown" id="heroCountdown">
+            <div class="countdown-block"><div class="countdown-num" id="cdDays">--</div><div class="countdown-label">Days</div></div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-block"><div class="countdown-num" id="cdHours">--</div><div class="countdown-label">Hours</div></div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-block"><div class="countdown-num" id="cdMins">--</div><div class="countdown-label">Min</div></div>
+            <div class="countdown-sep">:</div>
+            <div class="countdown-block"><div class="countdown-num" id="cdSecs">--</div><div class="countdown-label">Sec</div></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-ide" id="heroIde">
+            <div class="ide-header">
+              <div class="ide-dot" style="background: #ef4444;"></div>
+              <div class="ide-dot" style="background: #f59e0b;"></div>
+              <div class="ide-dot" style="background: #22c55e;"></div>
+              <div class="ide-tabs">
+                <div class="ide-tab active" data-panel="app">app.tsx</div>
+                <div class="ide-tab" data-panel="stripe">stripe.ts</div>
+                <div class="ide-tab" data-panel="funnel">funnel.tsx</div>
+              </div>
+            </div>
+            <div class="ide-body">
+              <div class="ide-code">
+                <!-- app.tsx panel -->
+                <div class="ide-code-panel active" id="panel-app">
+                  <div><span class="line-num">1</span><span class="cm">// Day 1: Foundation &amp; Deploy</span></div>
+                  <div><span class="line-num">2</span><span class="kw">import</span> { <span class="fn">createApp</span> } <span class="kw">from</span> <span class="str">'spark-stack'</span></div>
+                  <div><span class="line-num">3</span><span class="kw">import</span> { <span class="fn">auth</span>, <span class="fn">db</span>, <span class="fn">payments</span> } <span class="kw">from</span> <span class="str">'./core'</span></div>
+                  <div><span class="line-num">4</span></div>
+                  <div><span class="line-num">5</span><span class="kw">const</span> <span class="var">app</span> <span class="op">=</span> <span class="fn">createApp</span>({</div>
+                  <div><span class="line-num">6</span>&nbsp;&nbsp;<span class="attr">name</span><span class="op">:</span> <span class="str">'YourSaaS'</span>,</div>
+                  <div><span class="line-num">7</span>&nbsp;&nbsp;<span class="attr">auth</span><span class="op">:</span> <span class="fn">auth</span>.<span class="fn">supabase</span>(),</div>
+                  <div><span class="line-num">8</span>&nbsp;&nbsp;<span class="attr">database</span><span class="op">:</span> <span class="fn">db</span>.<span class="fn">postgres</span>(),</div>
+                  <div><span class="line-num">9</span>&nbsp;&nbsp;<span class="attr">payments</span><span class="op">:</span> <span class="fn">payments</span>.<span class="fn">stripe</span>(),</div>
+                  <div><span class="line-num">10</span>})<span class="type-cursor"></span></div>
+                  <div><span class="line-num">11</span></div>
+                  <div><span class="line-num">12</span><span class="cm">// You own this. No rent. No lock-in.</span></div>
+                  <div><span class="line-num">13</span><span class="kw">export default</span> <span class="var">app</span></div>
+                </div>
+                <!-- stripe.ts panel -->
+                <div class="ide-code-panel" id="panel-stripe">
+                  <div><span class="line-num">1</span><span class="cm">// Day 2: Payments &amp; Monetization</span></div>
+                  <div><span class="line-num">2</span><span class="kw">import</span> <span class="var">Stripe</span> <span class="kw">from</span> <span class="str">'stripe'</span></div>
+                  <div><span class="line-num">3</span></div>
+                  <div><span class="line-num">4</span><span class="kw">export const</span> <span class="fn">checkout</span> <span class="op">=</span> <span class="kw">async</span> (<span class="var">plan</span>) <span class="op">=></span> {</div>
+                  <div><span class="line-num">5</span>&nbsp;&nbsp;<span class="kw">const</span> <span class="var">session</span> <span class="op">=</span> <span class="kw">await</span> <span class="var">stripe</span></div>
+                  <div><span class="line-num">6</span>&nbsp;&nbsp;&nbsp;&nbsp;.<span class="fn">checkout</span>.<span class="fn">sessions</span>.<span class="fn">create</span>({</div>
+                  <div><span class="line-num">7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">mode</span><span class="op">:</span> <span class="str">'subscription'</span>,</div>
+                  <div><span class="line-num">8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">line_items</span><span class="op">:</span> [{ <span class="attr">price</span><span class="op">:</span> <span class="var">plan</span>.<span class="attr">id</span> }],</div>
+                  <div><span class="line-num">9</span>&nbsp;&nbsp;&nbsp;&nbsp;})</div>
+                  <div><span class="line-num">10</span>&nbsp;&nbsp;<span class="kw">return</span> <span class="var">session</span>.<span class="attr">url</span></div>
+                  <div><span class="line-num">11</span>}<span class="type-cursor"></span></div>
+                  <div><span class="line-num">12</span></div>
+                  <div><span class="line-num">13</span><span class="cm">// Accept real money. Day one.</span></div>
+                </div>
+                <!-- funnel.tsx panel -->
+                <div class="ide-code-panel" id="panel-funnel">
+                  <div><span class="line-num">1</span><span class="cm">// Day 3: Marketing &amp; Ship</span></div>
+                  <div><span class="line-num">2</span><span class="kw">import</span> { <span class="fn">Funnel</span>, <span class="fn">Email</span>, <span class="fn">SMS</span> } <span class="kw">from</span> <span class="str">'./marketing'</span></div>
+                  <div><span class="line-num">3</span></div>
+                  <div><span class="line-num">4</span><span class="kw">const</span> <span class="var">revenue</span> <span class="op">=</span> <span class="fn">Funnel</span>.<span class="fn">create</span>({</div>
+                  <div><span class="line-num">5</span>&nbsp;&nbsp;<span class="attr">landing</span><span class="op">:</span> <span class="str">'/offer'</span>,</div>
+                  <div><span class="line-num">6</span>&nbsp;&nbsp;<span class="attr">checkout</span><span class="op">:</span> <span class="str">'/pay'</span>,</div>
+                  <div><span class="line-num">7</span>&nbsp;&nbsp;<span class="attr">upsell</span><span class="op">:</span> <span class="str">'/upgrade'</span>,</div>
+                  <div><span class="line-num">8</span>})</div>
+                  <div><span class="line-num">9</span></div>
+                  <div><span class="line-num">10</span><span class="fn">Email</span>.<span class="fn">sequence</span>(<span class="str">'welcome'</span>, <span class="str">'activate'</span>)</div>
+                  <div><span class="line-num">11</span><span class="fn">SMS</span>.<span class="fn">trigger</span>(<span class="str">'onboard'</span>)<span class="type-cursor"></span></div>
+                  <div><span class="line-num">12</span></div>
+                  <div><span class="line-num">13</span><span class="cm">// $525M+ framework. Installed.</span></div>
+                </div>
+              </div>
+              <!-- Terminal -->
+              <div class="ide-terminal" id="ideTerminal">
+                <div class="ide-terminal-header">
+                  <span class="ide-terminal-title">Terminal</span>
+                  <div class="ide-status">
+                    <div class="ide-status-dot" id="statusDot" style="background: var(--green);"></div>
+                    <span class="ide-status-text" id="statusText" style="color: var(--green);">Deployed</span>
+                  </div>
+                </div>
+                <div class="ide-terminal-lines" id="termLines">
+                  <div class="terminal-line show"><span class="accent">$</span> spark deploy --production</div>
+                  <div class="terminal-line show"><span class="success">&#10003;</span> Auth configured (Supabase)</div>
+                  <div class="terminal-line show"><span class="success">&#10003;</span> Database connected (PostgreSQL)</div>
+                  <div class="terminal-line show"><span class="success">&#10003;</span> Stripe webhooks active</div>
+                  <div class="terminal-line show"><span class="success">&#10003;</span> Funnel &amp; email sequences live</div>
+                  <div class="terminal-line show"><span class="warn">&#8594;</span> <span style="color:#fff;">https://yoursaas.com</span> <span class="success">LIVE</span></div>
+                </div>
+                <div class="ide-progress"><div class="ide-progress-bar" id="progressBar" style="width: 100%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CREDIBILITY BAR ═══ -->
+    <div class="cred-bar reveal">
+      <p class="cred-label">Built on production-grade infrastructure</p>
+      <div class="cred-logos">
+        <div class="cred-item"><strong>React</strong></div>
+        <div class="cred-item"><strong>TypeScript</strong></div>
+        <div class="cred-item"><strong>PostgreSQL</strong></div>
+        <div class="cred-item"><strong>Stripe</strong></div>
+        <div class="cred-item"><strong>Supabase</strong></div>
+        <div class="cred-item"><strong>Vercel</strong></div>
+      </div>
+      <div class="cred-stats">
+        <div class="cred-stat"><div class="val">$525M+</div><div class="desc">Combined Sales Generated</div></div>
+        <div class="cred-stat"><div class="val">3 Days</div><div class="desc">Idea to Live Business</div></div>
+        <div class="cred-stat"><div class="val">100%</div><div class="desc">Completion Guarantee</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ WHAT YOU GET ═══ -->
+    <section class="section reveal">
+      <div class="w-7xl px">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h2 class="heading" style="margin-bottom: 0.5rem;">You Don&rsquo;t Learn How To Build.<br/><span class="italic accent">You Build.</span></h2>
+          <p class="sub" style="max-width: 560px; margin: 0 auto;">By the time you leave Dallas, you own a live software business with payments working and marketing installed.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card glass"><div class="feature-icon">&#9889;</div><h3>Live Application</h3><p>Real URL, real users. Your app is deployed and running on the internet.</p></div>
+          <div class="feature-card glass"><div class="feature-icon">&#128274;</div><h3>Authentication</h3><p>Secure, professional-grade. Users can sign up, log in, and access their data.</p></div>
+          <div class="feature-card glass"><div class="feature-icon">&#128179;</div><h3>Payments Enabled</h3><p>Stripe integration with webhooks and entitlements. Accept real money.</p></div>
+          <div class="feature-card glass"><div class="feature-icon">&#128200;</div><h3>Marketing Installed</h3><p>Funnels, email sequences, SMS automations. Complete revenue infrastructure.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ INSTRUCTORS ═══ -->
+    <section id="instructors" class="section reveal">
+      <div class="w-7xl px">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h2 class="heading">Two Systems. One Outcome.<br/><span class="italic">Complete Ownership.</span></h2>
+        </div>
+        <div class="instructor-grid">
+          <div class="instructor-card glass">
+            <img src="images/damien-rufus.jpg" alt="Damien Rufus" />
+            <h3>Damien Rufus</h3>
+            <p class="role">The Build System</p>
+            <p class="tagline">Deploy Fast. Build Correctly. Own Everything.</p>
+            <p class="desc">Damien Rufus doesn&rsquo;t teach theory&mdash;he installs infrastructure. While most people are trapped in platform dependency and demo loops, Damien shows you how to build production-grade software you completely control.</p>
+            <p class="focus">Day 1&ndash;2 Focus: Professional infrastructure, secure authentication, live deployment, payment integration.</p>
+          </div>
+          <div class="instructor-card glass">
+            <img src="images/damien-watts.jpg" alt="Damien Watts" />
+            <h3>Damien Watts</h3>
+            <p class="role">The Revenue System</p>
+            <p class="tagline">Turn Software Into Cash-Generating Machines.</p>
+            <p class="desc">Damien Watts has scaled over <span class="accent" style="font-weight: 700;">$525M in online sales</span> and architected the OfferNomics framework that powers the Digital Hustlers ecosystem. He doesn&rsquo;t just teach marketing&mdash;he installs complete revenue systems.</p>
+            <p class="focus">Day 2&ndash;3 Focus: Marketing infrastructure, funnel systems, email automation, monetization strategy.</p>
+          </div>
+        </div>
+        <div class="glass-panel" style="margin-top: 2rem; padding: 2.5rem; text-align: center;">
+          <p style="font-size: 1.2rem; color: var(--text); font-weight: 600; margin-bottom: 1.25rem;">Together, you get the complete stack:</p>
+          <div style="display: inline-flex; flex-direction: column; gap: 0.75rem; text-align: left; margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
+              <span style="color: var(--green); font-size: 1.25rem;">&#10003;</span>
+              <span>Software that works</span>
+              <span style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Rufus</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
+              <span style="color: var(--green); font-size: 1.25rem;">&#10003;</span>
+              <span>Marketing that converts</span>
+              <span style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Watts</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 600;">
+              <span style="color: var(--green); font-size: 1.25rem;">&#10003;</span>
+              <span>A business you own</span>
+              <span style="color: var(--text-muted); font-weight: 400; font-size: 0.95rem;">&mdash; Both</span>
+            </div>
+          </div>
+          <div style="width: 60px; height: 2px; background: var(--accent); margin: 0 auto 1rem; border-radius: 99px;"></div>
+          <p class="italic" style="color: var(--text); font-size: 1.2rem;">This is not a workshop. This is a business installation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ DIVIDER ═══ -->
+    <div class="theme-divider"><div class="line line-l"></div><div class="line line-r"></div></div>
+
+    <!-- ═══ PAIN POINTS ═══ -->
+    <section class="section reveal">
+      <div class="w-4xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading" style="margin-bottom: 0.5rem;">The Truth About &ldquo;AI App Builders&rdquo;</h2>
+          <p class="sub">Building an app is easy. Owning it at scale? That&rsquo;s where infrastructure matters.</p>
+        </div>
+        <div class="pain-item"><div class="pain-icon">&#10005;</div><div style="flex: 1;"><h4>You&rsquo;re renting infrastructure you don&rsquo;t own</h4><p>&ldquo;Build apps with AI&mdash;no coding required!&rdquo;</p></div><span class="pain-code">VENDOR_LOCK</span></div>
+        <div class="pain-item"><div class="pain-icon">&#10005;</div><div style="flex: 1;"><h4>You&rsquo;re building demos, not businesses</h4><p>&ldquo;Just use prompts and ship in hours!&rdquo;</p></div><span class="pain-code">DEMO_ONLY</span></div>
+        <div class="pain-item"><div class="pain-icon">&#10005;</div><div style="flex: 1;"><h4>You&rsquo;re trapped inside someone else&rsquo;s platform</h4><p>&ldquo;Replit, Lovable, Bolt will do it all for you!&rdquo;</p></div><span class="pain-code">PLATFORM_TRAP</span></div>
+        <div class="pain-item"><div class="pain-icon">&#10005;</div><div style="flex: 1;"><h4>No marketing infrastructure</h4><p>When you need to scale, add payments, secure users? You&rsquo;re stuck.</p></div><span class="pain-code">NO_REVENUE</span></div>
+        <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.05);">
+          <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 0.35rem;">The problem isn&rsquo;t the AI.</p>
+          <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 1rem;">The problem is the infrastructure layer.</p>
+          <p style="font-size: 1.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.04em;">That&rsquo;s what we install.</p>
+          <div style="width: 60px; height: 3px; background: var(--accent); margin: 0.75rem auto 1.25rem; border-radius: 99px;"></div>
+          <a href="#pricing" class="btn-primary cta-shimmer">See the Solution &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ DIVIDER ═══ -->
+    <div class="theme-divider"><div class="line line-l"></div><div class="line line-r"></div></div>
+
+    <!-- ═══ PILLARS ═══ -->
+    <section id="system" class="section reveal">
+      <div class="w-7xl px">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h2 class="heading"><span class="italic">Installed,</span> Not Taught</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+          <div class="glass-panel" style="padding: 2.5rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">Pillar 1: Your Own Software</h3>
+            <p style="color: var(--accent); font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem;">Built The Right Way</p>
+            <p class="body-text" style="margin-bottom: 0.75rem;">Forget Replit. Forget Lovable. Forget rented platforms. You&rsquo;ll build on professional infrastructure that you completely own.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1.5rem; margin-bottom: 0.75rem;">
+              <p class="body-text">&#9670; Modern web framework</p>
+              <p class="body-text">&#9670; Secure database</p>
+              <p class="body-text">&#9670; Professional hosting</p>
+              <p class="body-text">&#9670; Clean architecture</p>
+            </div>
+            <p style="font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem;">No platform dependency. No rent extraction. No hidden costs.</p>
+            <p style="font-size: 1rem; color: var(--text-secondary);">Led by <strong style="color: var(--text);">Damien Rufus</strong> &mdash; The execution architect.</p>
+          </div>
+          <div class="glass-panel" style="padding: 2.5rem;">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">Pillar 2: Marketing Infrastructure</h3>
+            <p style="color: var(--accent); font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem;">Pre-Installed</p>
+            <p class="body-text" style="margin-bottom: 0.75rem;">Complete marketing machine powered by the OfferNomics framework that&rsquo;s scaled over <span class="accent" style="font-weight: 700;">$525M in online sales</span>.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1.5rem; margin-bottom: 0.75rem;">
+              <p class="body-text">&#9670; Sales funnel (opt-in &rarr; checkout)</p>
+              <p class="body-text">&#9670; Email sequences</p>
+              <p class="body-text">&#9670; SMS automations</p>
+              <p class="body-text">&#9670; Monetization strategy</p>
+            </div>
+            <p style="font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem;">You don&rsquo;t learn marketing. You leave with marketing.</p>
+            <p style="font-size: 1rem; color: var(--text-secondary);">Led by <strong style="color: var(--text);">Damien Watts</strong> &mdash; The revenue strategist.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3-STEP PROCESS ═══ -->
+    <section class="section reveal" style="background: rgba(255,72,0,0.015);">
+      <div class="w-6xl px">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+          <h2 class="heading">Build. Monetize. <span class="accent">Ship.</span></h2>
+        </div>
+        <div class="steps-row">
+          <div class="step"><div class="step-circle">01</div><h3>Foundation</h3><p>Start with proven template. Connect infrastructure. Authentication live.</p></div>
+          <div class="step"><div class="step-circle">02</div><h3>Deploy &amp; Monetize</h3><p>Live URL. Stripe payments. Marketing funnels installed.</p></div>
+          <div class="step"><div class="step-circle active">03</div><h3>Ship &amp; Scale</h3><p>Complete system integration. You leave owning a company.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3-DAY BREAKDOWN ═══ -->
+    <section class="section reveal">
+      <div class="w-5xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading">How The 3 Days Work</h2>
+          <p style="color: var(--text-secondary); font-size: 1.15rem; margin-top: 0.5rem;">No gaps. No guessing.</p>
+        </div>
+        <div class="glass-panel">
+          <div class="day-block open">
+            <div class="day-header" onclick="this.closest('.day-block').classList.toggle('open')">
+              <div class="day-dot" style="background: var(--green);"></div>
+              <span class="day-label" style="color: var(--green);">Day 1</span>
+              <span class="day-title">Foundation &amp; Reality Install</span>
+              <span class="day-chevron">&#9660;</span>
+            </div>
+            <div class="day-body"><div class="day-body-inner">
+              <p class="day-shift">&ldquo;I am an operator, not a learner.&rdquo;</p>
+              <p class="day-led">Led by Damien Rufus</p>
+              <ul class="day-list">
+                <li>Start with a proven template (no building from scratch)</li>
+                <li>Connect your infrastructure (database, hosting, security)</li>
+                <li>Set up authentication (users can sign up and log in)</li>
+                <li>See your app running live</li>
+                <li>Learn how to recover if something breaks</li>
+              </ul>
+              <div class="day-win">Hard Win: App running and under your complete control.</div>
+            </div></div>
+          </div>
+          <div class="day-block">
+            <div class="day-header" onclick="this.closest('.day-block').classList.toggle('open')">
+              <div class="day-dot" style="background: #3b82f6;"></div>
+              <span class="day-label" style="color: #3b82f6;">Day 2</span>
+              <span class="day-title">Deployment, Payments &amp; Marketing</span>
+              <span class="day-chevron">&#9660;</span>
+            </div>
+            <div class="day-body"><div class="day-body-inner">
+              <p class="day-shift">&ldquo;This is real software. This is a real business.&rdquo;</p>
+              <p class="day-led">Led by Damien Rufus (Morning) + Damien Watts (Afternoon)</p>
+              <p class="day-sub">Morning &mdash; Build</p>
+              <ul class="day-list">
+                <li>Deploy to the internet (live URL anyone can visit)</li>
+                <li>Enable secure authentication (professional-grade security)</li>
+                <li>Connect Stripe (accept real payments)</li>
+                <li>Test payment flow (money unlocks access to features)</li>
+              </ul>
+              <p class="day-sub">Afternoon &mdash; Monetize</p>
+              <ul class="day-list">
+                <li>Install funnel infrastructure (opt-in to checkout flow)</li>
+                <li>Set up email automation (welcome, activation, retention)</li>
+                <li>Configure SMS systems (engagement and urgency triggers)</li>
+                <li>Map your monetization strategy (pricing, positioning, offers)</li>
+              </ul>
+              <div class="day-win">Hard Win: Live app with payments working AND marketing infrastructure installed.</div>
+            </div></div>
+          </div>
+          <div class="day-block">
+            <div class="day-header" onclick="this.closest('.day-block').classList.toggle('open')">
+              <div class="day-dot" style="background: var(--red);"></div>
+              <span class="day-label" style="color: var(--red);">Day 3</span>
+              <span class="day-title">Complete System &amp; Ship</span>
+              <span class="day-chevron">&#9660;</span>
+            </div>
+            <div class="day-body"><div class="day-body-inner">
+              <p class="day-shift">&ldquo;I own a company.&rdquo;</p>
+              <p class="day-led">Led by Damien Watts (Morning) + Both (Afternoon)</p>
+              <p class="day-sub">Morning &mdash; Marketing Completion</p>
+              <ul class="day-list">
+                <li>Finalize sales funnel (copy, design, flow)</li>
+                <li>Complete email sequences (personalization, segmentation)</li>
+                <li>Set up analytics (track what&rsquo;s working)</li>
+                <li>Create smooth onboarding (first-time user experience)</li>
+              </ul>
+              <p class="day-sub">Afternoon &mdash; Final Integration</p>
+              <ul class="day-list">
+                <li>Connect all systems (app + marketing + payments)</li>
+                <li>Complete final checklist (definition of done)</li>
+                <li>Document your transformation (before/after proof)</li>
+                <li>Plan your first 30 days post-launch</li>
+              </ul>
+              <div class="day-win">Hard Win: Complete business-in-a-box, ready for users and revenue.</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ LOCATION ═══ -->
+    <section class="section reveal">
+      <div class="w-5xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading">Why Dallas? Why In-Person? <span class="italic">Why Now?</span></h2>
+          <p style="color: var(--text-secondary); font-size: 1.1rem; margin-top: 0.5rem;">Marriott Dallas Allen Hotel &amp; Convention Center &middot; 777 Watters Creek Blvd, Allen, TX 75013</p>
+        </div>
+        <div class="location-grid">
+          <div class="location-card glass"><div class="icon">&#9889;</div><h4>Forced Momentum</h4><p>No procrastination. No distractions.</p></div>
+          <div class="location-card glass"><div class="icon">&#128101;</div><h4>Peer Accountability</h4><p>20 builders pushing each other forward.</p></div>
+          <div class="location-card glass"><div class="icon">&#128736;</div><h4>Real-Time Help</h4><p>Stuck? Get unblocked in minutes.</p></div>
+          <div class="location-card glass"><div class="icon">&#127793;</div><h4>Identity Shifts</h4><p>Leave as an operator, not a learner.</p></div>
+        </div>
+        <p class="italic" style="text-align: center; margin-top: 1.25rem; font-size: 1.2rem;">You can&rsquo;t hide. You can&rsquo;t delay. You <span class="accent" style="font-weight: 700;">ship</span>&mdash;or you don&rsquo;t leave.</p>
+      </div>
+    </section>
+
+    <!-- ═══ PRICING ═══ -->
+    <section id="pricing" class="section reveal">
+      <div class="w-5xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading">Dallas Launch Pricing <span class="italic">(Limited Time)</span></h2>
+        </div>
+        <div class="pricing-card glass-panel neon-glow">
+          <p class="pricing-old">Standard Investment: $15,000+</p>
+          <p class="pricing-amount text-glow">$2,500</p>
+          <p class="pricing-label">First Dallas Cohort &mdash; Launch Pricing</p>
+          <ul class="pricing-checks">
+            <li><span class="icon">&#10003;</span> Same proven execution system</li>
+            <li><span class="icon">&#10003;</span> Same outcomes &amp; deliverables</li>
+            <li><span class="icon">&#10003;</span> Strategic first-cohort timing</li>
+            <li><span class="icon">&#10003;</span> Future cohorts return to $15,000+</li>
+          </ul>
+          <!-- Seat counter -->
+          <div class="seat-counter" style="margin-bottom: 1.25rem;">
+            <div class="seat-counter-text"><span class="num seat-num">13</span> of 20 seats claimed</div>
+            <div class="seat-bar"><div class="seat-bar-fill" style="width: 65%;"></div></div>
+            <div class="seat-counter-sub">Only <strong class="seat-remain" style="color: var(--accent);">7</strong> spots remaining</div>
+          </div>
+          <a href="https://buy.stripe.com/cNi6oH72v4AOargfPl6g80a" class="btn-primary cta-shimmer" style="width: 100%; justify-content: center;">Reserve Your Seat Now &rarr;</a>
+
+          <div class="guarantee-badge" style="margin-top: 0.75rem;">&#9989; 100% Execution Guarantee &middot; 72-Hour Refund</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ GUARANTEE ═══ -->
+    <section class="section reveal">
+      <div class="w-5xl px">
+        <div class="guarantee-card glass-panel">
+          <div class="guarantee-shield">&#128737;</div>
+          <h2 class="heading" style="font-size: 2rem; margin-bottom: 0.5rem;">The Execution Guarantee&trade;</h2>
+          <p style="color: var(--text-secondary); font-size: 1.15rem; margin-bottom: 1.25rem;">We guarantee completion&mdash;not revenue. Your risk is removed.</p>
+          <ul class="check-list" style="display: inline-block; text-align: left; margin-bottom: 1.25rem;">
+            <li><span class="icon">&#10003;</span> Show up and follow the system</li>
+            <li><span class="icon">&#10003;</span> You <strong>will</strong> leave with a live, functional application</li>
+            <li><span class="icon">&#10003;</span> If you don&rsquo;t finish, we keep working with you until it&rsquo;s done</li>
+            <li><span class="icon">&#10003;</span> <strong>72-hour full refund</strong> &mdash; no questions asked</li>
+          </ul>
+          <p style="font-weight: 600; font-size: 1.15rem; margin-bottom: 0.5rem;">Zero risk. Complete protection.</p>
+          <p style="font-size: 1rem; color: var(--text-secondary); font-style: italic;">We do not promise income. We promise execution.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ AUDIENCE ═══ -->
+    <section class="section reveal">
+      <div class="w-5xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading">Who This Is For <span class="italic">(And Who It&rsquo;s Not)</span></h2>
+        </div>
+        <div class="audience-grid">
+          <div class="audience-card glass for">
+            <h3>This Is For You If:</h3>
+            <ul class="audience-list">
+              <li><span class="icon">&#10003;</span> You have an idea and want it real</li>
+              <li><span class="icon">&#10003;</span> You&rsquo;re tired of half-built projects</li>
+              <li><span class="icon">&#10003;</span> You want to own your software, not rent it</li>
+              <li><span class="icon">&#10003;</span> You&rsquo;re ready to execute under guidance</li>
+              <li><span class="icon">&#10003;</span> You can commit to 3 full days in Dallas</li>
+              <li><span class="icon">&#10003;</span> No coding experience needed</li>
+              <li><span class="icon">&#10003;</span> You&rsquo;re serious about building a real business</li>
+            </ul>
+          </div>
+          <div class="audience-card glass not">
+            <h3>This Is NOT For You If:</h3>
+            <ul class="audience-list">
+              <li><span class="icon">&#10005;</span> You want to &ldquo;explore a few ideas&rdquo;</li>
+              <li><span class="icon">&#10005;</span> You need constant validation</li>
+              <li><span class="icon">&#10005;</span> You want someone to build it for you</li>
+              <li><span class="icon">&#10005;</span> You&rsquo;re looking for passive income hype</li>
+              <li><span class="icon">&#10005;</span> You can&rsquo;t follow step-by-step instructions</li>
+              <li><span class="icon">&#10005;</span> You&rsquo;re not willing to invest in marketing</li>
+            </ul>
+          </div>
+        </div>
+        <p style="text-align: center; font-weight: 600; margin-top: 2.5rem; font-size: 1.25rem;">We build operators, not consumers.</p>
+      </div>
+    </section>
+
+    <!-- ═══ COMPARISON ═══ -->
+    <section class="section reveal">
+      <div class="w-5xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading">What You&rsquo;re Really <span class="accent">Comparing</span> This To</h2>
+        </div>
+        <div class="comp-grid">
+          <div class="comp-col glass"><p class="comp-title">Hire a Dev Team</p><p class="comp-cost">$50K&ndash;$150K</p><p class="comp-time">6&ndash;12 months</p><p class="comp-risk">Scope creep, dependency</p><p class="comp-verdict" style="color: var(--red);">&#10005;</p></div>
+          <div class="comp-col glass"><p class="comp-title">DIY with Courses</p><p class="comp-cost">Time + Confidence</p><p class="comp-time">12&ndash;24 months</p><p class="comp-risk">Tool hopping, no shipping</p><p class="comp-verdict" style="color: var(--red);">&#10005;</p></div>
+          <div class="comp-col glass"><p class="comp-title">Replit / Lovable / Bolt</p><p class="comp-cost">$20&ndash;$50/mo forever</p><p class="comp-time">Fast demos, slow reality</p><p class="comp-risk">No ownership, trapped</p><p class="comp-verdict" style="color: var(--red);">&#10005;</p></div>
+          <div class="comp-col glass highlighted"><p class="comp-title">SPARK Accelerator&trade;</p><p class="comp-cost">$2,500</p><p class="comp-time">3 Days</p><p class="comp-risk">Risk removed by system</p><p class="comp-verdict">&#10003;</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SAVINGS ═══ -->
+    <section class="section reveal">
+      <div class="w-5xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading">The Real Cost <span class="accent">Savings</span></h2>
+        </div>
+        <div class="savings-grid">
+          <div class="savings-card glass"><h3>Platform Fees (Avoided)</h3><div class="savings-row"><span class="savings-name">Replit Pro</span><span class="savings-cost">$300/yr</span></div><div class="savings-row"><span class="savings-name">Lovable</span><span class="savings-cost">$600/yr</span></div><div class="savings-row"><span class="savings-name">Bubble</span><span class="savings-cost">$348&ndash;$1,428/yr</span></div><div class="savings-row"><span class="savings-name">Your Cost</span><span class="savings-yours">$0/month</span></div></div>
+          <div class="savings-card glass"><h3>Dev Costs (Avoided)</h3><div class="savings-row"><span class="savings-name">Junior Developer</span><span class="savings-cost">$5K&ndash;$7.5K</span></div><div class="savings-row"><span class="savings-name">Agency Build</span><span class="savings-cost">$50K&ndash;$150K</span></div><div class="savings-row"><span class="savings-name">Your Cost</span><span class="savings-yours">$2,500 one-time</span></div></div>
+          <div class="savings-card glass"><h3>Marketing Tools (Included)</h3><div class="savings-row"><span class="savings-name">Funnel Builder</span><span class="savings-cost">$1.1K&ndash;$3.5K/yr</span></div><div class="savings-row"><span class="savings-name">Email Platform</span><span class="savings-cost">$348&ndash;$2.3K/yr</span></div><div class="savings-row"><span class="savings-name">SMS Platform</span><span class="savings-cost">$588&ndash;$3.5K/yr</span></div><div class="savings-row"><span class="savings-name">Your Cost</span><span class="savings-yours">Included</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ INCLUDED ═══ -->
+    <section class="section reveal">
+      <div class="w-5xl px">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 class="heading">What&rsquo;s Included</h2>
+        </div>
+        <ul class="included-list">
+          <li><span class="icon">&#10003;</span> 3-day in-person intensive (Dallas)</li>
+          <li><span class="icon">&#10003;</span> Professional app template (proven, tested)</li>
+          <li><span class="icon">&#10003;</span> Database + hosting + payment setup</li>
+          <li><span class="icon">&#10003;</span> Complete marketing infrastructure (funnels, emails, SMS)</li>
+          <li><span class="icon">&#10003;</span> OfferNomics monetization framework</li>
+          <li><span class="icon">&#10003;</span> White-glove build support</li>
+          <li><span class="icon">&#10003;</span> Recovery &amp; troubleshooting training</li>
+          <li><span class="icon">&#10003;</span> Ship checklist &amp; case study capture</li>
+          <li><span class="icon">&#10003;</span> 30-day post-event execution support</li>
+        </ul>
+        <p class="label" style="margin-top: 1rem;">Limited to 20 builders. No exceptions.</p>
+        <a href="https://buy.stripe.com/cNi6oH72v4AOargfPl6g80a" class="btn-primary cta-shimmer" style="margin-top: 1rem;">Reserve Your Seat &mdash; $2,500 &rarr;</a>
+      </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section id="faq" class="section reveal">
+      <div class="w-5xl px">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h2 class="heading">Frequently Asked <span class="italic">Questions</span></h2>
+        </div>
+        <div class="faq-wrapper glass-panel">
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>Do I need coding experience?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">No. You need to be able to follow step-by-step instructions and use a computer. We provide proven templates and guide you through every step.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>What if I get stuck?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">You won&rsquo;t stay stuck. We have support staff circulating the room and protocols to unblock issues in real time. No one gets left behind.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>Can I bring my own idea?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">Yes&mdash;but it must pass our Idea Grader before arrival. We eliminate ideation on-site to protect momentum.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>What if I don&rsquo;t finish?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">If you follow the system and don&rsquo;t leave with a working app, we continue working with you until it&rsquo;s complete. That&rsquo;s the guarantee.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>Will this work on Windows?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">Mac or Linux strongly preferred, but Windows can work. We&rsquo;ll provide guidance during pre-event setup.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>Do I need to pay monthly fees after this?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">Minimal hosting costs only ($10&ndash;30/month). No platform fees. No rent extraction. You own everything.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>What marketing experience do I need?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">None. Damien Watts will install the complete marketing infrastructure for you. The OfferNomics framework has scaled over $525M in sales.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>What happens after the 3 days?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">You own everything. Run it, scale it, sell it, or join our continuity community for ongoing support.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>Is this recorded?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">No. Live execution only. No recordings protects the experience and the intellectual property.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>What&rsquo;s the refund policy?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">72-hour full refund window. After that, we&rsquo;re committed to getting you across the finish line.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>Can I hire developers later?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">Yes. You own the code and infrastructure. Any developer can work on it. No proprietary lock-in.</div></div></div>
+          <div class="faq-item"><div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')"><span>Will I learn how to get users/customers?</span><span class="faq-chevron">&#9660;</span></div><div class="faq-a"><div class="faq-a-inner">Yes. Damien Watts covers complete go-to-market strategy including funnel optimization, email sequences, and SMS automation.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ONE FINAL TRUTH ═══ -->
+    <section class="section reveal" style="text-align: center;">
+      <div class="w-3xl px">
+        <h2 class="heading" style="margin-bottom: 0.75rem;"><span class="italic">One Final Truth</span></h2>
+        <div style="width: 48px; height: 2px; background: var(--accent); margin: 0 auto 1.25rem;"></div>
+        <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">The most expensive option is staying where you are.</p>
+        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.25rem;">Another year without a product.<br/>Another idea that dies in a Notion doc.<br/>Another &ldquo;I&rsquo;ll do it later.&rdquo;</p>
+        <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 1rem;">Or:</p>
+        <p style="font-weight: 600; font-size: 1.15rem; line-height: 1.8; margin-bottom: 0.25rem;">3 days in Dallas. App live. Payments working.<br/>Marketing installed. You own everything.</p>
+        <p style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--accent); margin-bottom: 0;">You decide.</p>
+      </div>
+    </section>
+
+    <!-- ═══ FINAL CTA ═══ -->
+    <section class="section-tight reveal">
+      <div class="w-5xl px">
+        <div class="final-cta-card glass-panel neon-glow-strong">
+          <h2 class="heading" style="font-size: clamp(1.5rem, 4vw, 2.25rem); margin-bottom: 0.5rem;">Reserve Your Seat <span class="italic">(Only <span class="seat-remain">7</span> Left)</span></h2>
+          <p style="color: var(--text-secondary); font-size: 1.1rem;">February 27&ndash;29, 2026 &middot; Marriott Dallas Allen Hotel &middot; Allen, TX 75013</p>
+          <p style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--accent); margin: 0.75rem 0 0.25rem;" class="text-glow">$2,500</p>
+          <!-- Seat counter -->
+          <div class="seat-counter" style="margin: 0.5rem 0 1rem;">
+            <div class="seat-counter-text"><span class="num seat-num">13</span> of 20 seats claimed</div>
+            <div class="seat-bar"><div class="seat-bar-fill" style="width: 65%;"></div></div>
+          </div>
+          <p class="italic" style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 1.15rem;">You arrive with an idea. You leave with a company.</p>
+          <a href="https://buy.stripe.com/cNi6oH72v4AOargfPl6g80a" class="btn-primary cta-shimmer" style="padding: 1rem 2.5rem;">Reserve Your Seat Now &rarr;</a>
+
+          <div class="guarantee-badge" style="margin-top: 0.75rem;">&#9989; 100% Execution Guarantee &middot; 72-Hour Refund</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ STICKY MOBILE CTA ═══ -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-inner">
+      <div class="sticky-cta-info">
+        <span class="sticky-cta-price">$2,500</span>
+        <span class="sticky-cta-seats">Only <strong class="seat-remain" style="color: var(--accent);">7</strong> seats left</span>
+      </div>
+      <a href="https://buy.stripe.com/cNi6oH72v4AOargfPl6g80a" class="btn-primary">Reserve Seat &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <p>The SPARK Accelerator&trade; is a production-grade build experience for serious operators. We do not promise revenue. We promise execution.</p>
+    <p style="margin-top: 0.5rem;">Secure Checkout &middot; Limited to 20 Seats</p>
+    <p>Questions? <a href="mailto:support@sparkaccelerator.com">support@sparkaccelerator.com</a></p>
+    <p style="margin-top: 0.5rem;">Led by Damien Rufus &amp; Damien Watts &middot; Execution Era Collective</p>
+  </footer>
+
+  <!-- ═══ JS ═══ -->
+  <script>
+    // Scroll reveal
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.05 }).observe(el);
+    });
+
+    // ── Interactive IDE ──
+    (function() {
+      var tabs = document.querySelectorAll('.ide-tab');
+      var panels = document.querySelectorAll('.ide-code-panel');
+      var termLines = document.getElementById('termLines');
+      var progressBar = document.getElementById('progressBar');
+      var statusDot = document.getElementById('statusDot');
+      var statusText = document.getElementById('statusText');
+
+      var terminalData = {
+        app: [
+          { text: '<span class="accent">$</span> spark init --template saas', delay: 0 },
+          { text: '<span class="success">&#10003;</span> Project scaffolded', delay: 400 },
+          { text: '<span class="success">&#10003;</span> Auth configured (Supabase)', delay: 800 },
+          { text: '<span class="success">&#10003;</span> Database connected (PostgreSQL)', delay: 1200 },
+          { text: '<span class="success">&#10003;</span> Deploying to production...', delay: 1600 },
+          { text: '<span class="warn">&#8594;</span> <span style="color:#fff;">https://yoursaas.com</span> <span class="success">LIVE</span>', delay: 2200 }
+        ],
+        stripe: [
+          { text: '<span class="accent">$</span> spark payments --enable', delay: 0 },
+          { text: '<span class="success">&#10003;</span> Stripe API connected', delay: 400 },
+          { text: '<span class="success">&#10003;</span> Webhook endpoints created', delay: 800 },
+          { text: '<span class="success">&#10003;</span> Subscription plans configured', delay: 1200 },
+          { text: '<span class="success">&#10003;</span> Checkout flow tested', delay: 1600 },
+          { text: '<span class="warn">&#8594;</span> Payments <span class="success">ACTIVE</span> &mdash; accepting real money', delay: 2200 }
+        ],
+        funnel: [
+          { text: '<span class="accent">$</span> spark marketing --install', delay: 0 },
+          { text: '<span class="success">&#10003;</span> Funnel pages generated', delay: 400 },
+          { text: '<span class="success">&#10003;</span> Email sequences armed (5 flows)', delay: 800 },
+          { text: '<span class="success">&#10003;</span> SMS automations configured', delay: 1200 },
+          { text: '<span class="success">&#10003;</span> Analytics & tracking live', delay: 1600 },
+          { text: '<span class="warn">&#8594;</span> Revenue system <span class="success">INSTALLED</span> &mdash; ready to scale', delay: 2200 }
+        ]
+      };
+
+      var statusData = {
+        app: { color: 'var(--green)', text: 'Deployed' },
+        stripe: { color: 'var(--accent)', text: 'Payments Active' },
+        funnel: { color: '#3b82f6', text: 'Marketing Live' }
+      };
+
+      function switchTab(tabName) {
+        tabs.forEach(function(t) { t.classList.toggle('active', t.dataset.panel === tabName); });
+        panels.forEach(function(p) { p.classList.toggle('active', p.id === 'panel-' + tabName); });
+        runTerminal(tabName);
+      }
+
+      function runTerminal(tabName) {
+        var lines = terminalData[tabName];
+        var status = statusData[tabName];
+        // Reset
+        termLines.innerHTML = '';
+        progressBar.style.width = '0%';
+        statusDot.style.background = '#f59e0b';
+        statusText.style.color = '#f59e0b';
+        statusText.textContent = 'Building...';
+
+        lines.forEach(function(l, i) {
+          var div = document.createElement('div');
+          div.className = 'terminal-line';
+          div.innerHTML = l.text;
+          termLines.appendChild(div);
+          setTimeout(function() {
+            div.classList.add('show');
+            progressBar.style.width = Math.round(((i + 1) / lines.length) * 100) + '%';
+            if (i === lines.length - 1) {
+              statusDot.style.background = status.color;
+              statusText.style.color = status.color;
+              statusText.textContent = status.text;
+            }
+          }, l.delay);
+        });
+      }
+
+      // Click handlers
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          clearInterval(autoCycle);
+          switchTab(tab.dataset.panel);
+          // Restart auto-cycle after 8 seconds of inactivity
+          autoCycle = setInterval(cycleNext, 5000);
+        });
+      });
+
+      // Auto-cycle tabs
+      var tabOrder = ['app', 'stripe', 'funnel'];
+      var currentIdx = 0;
+
+      function cycleNext() {
+        currentIdx = (currentIdx + 1) % tabOrder.length;
+        switchTab(tabOrder[currentIdx]);
+      }
+
+      var autoCycle = setInterval(cycleNext, 5000);
+    })();
+
+    // ── Countdown Timer ──
+    (function() {
+      var eventDate = new Date('2026-02-27T09:00:00-06:00').getTime();
+      var dEl = document.getElementById('cdDays');
+      var hEl = document.getElementById('cdHours');
+      var mEl = document.getElementById('cdMins');
+      var sEl = document.getElementById('cdSecs');
+
+      function pad(n) { return n < 10 ? '0' + n : n; }
+
+      function update() {
+        var now = Date.now();
+        var diff = eventDate - now;
+        if (diff <= 0) {
+          dEl.textContent = '00'; hEl.textContent = '00';
+          mEl.textContent = '00'; sEl.textContent = '00';
+          return;
+        }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        dEl.textContent = pad(d);
+        hEl.textContent = pad(h);
+        mEl.textContent = pad(m);
+        sEl.textContent = pad(s);
+      }
+
+      update();
+      setInterval(update, 1000);
+    })();
+
+    // ── Sticky Mobile CTA ──
+    (function() {
+      var sticky = document.getElementById('stickyCta');
+      var hero = document.querySelector('.hero');
+      if (!sticky || !hero) return;
+
+      new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            sticky.classList.remove('visible');
+          } else {
+            sticky.classList.add('visible');
+          }
+        });
+      }, { threshold: 0 }).observe(hero);
+    })();
+
+    // ── Seat Counter Config ──
+    // Change this number to update all seat counters across the page
+    (function() {
+      var SEATS_CLAIMED = 13;
+      var TOTAL_SEATS = 20;
+      var remaining = TOTAL_SEATS - SEATS_CLAIMED;
+      var pct = Math.round((SEATS_CLAIMED / TOTAL_SEATS) * 100);
+
+      // Update all seat-num elements
+      document.querySelectorAll('.seat-num').forEach(function(el) {
+        el.textContent = SEATS_CLAIMED;
+      });
+      // Update all seat-remain elements
+      document.querySelectorAll('.seat-remain').forEach(function(el) {
+        el.textContent = remaining;
+      });
+      // Update all progress bars
+      document.querySelectorAll('.seat-bar-fill').forEach(function(el) {
+        el.style.width = pct + '%';
+      });
+    })();
+  </script>
+</body>
+</html>
